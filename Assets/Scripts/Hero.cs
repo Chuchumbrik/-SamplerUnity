@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hero : MonoBehaviour
+public class Hero : Entyty
 {
     [SerializeField] private float speed = 3f; // скорость движения
-    //[SerializeField] private int lives = 5; // скорость движения
+    [SerializeField] private int lives = 5; // скорость движения
     [SerializeField] private float jumpForce = 7f; // сила прыжка
     private bool isGrounded = false;
 
@@ -25,7 +25,11 @@ public class Hero : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
+        Instance = this;
     }
+
+
+    public static Hero Instance { get; set; }
 
     private void FixedUpdate()
     {
@@ -64,6 +68,15 @@ public class Hero : MonoBehaviour
         isGrounded = collider.Length > 1;
 
         if (!isGrounded) state = states.jump;
+    }
+
+    public override void GetDamage()
+
+    {
+
+        lives -= 1;
+        Debug.Log(lives);
+
     }
 }
 
