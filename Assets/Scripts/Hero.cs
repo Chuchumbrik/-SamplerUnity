@@ -75,7 +75,7 @@ public class Hero : Entyty
     {
 
         lives -= 1;
-        Debug.Log(lives);
+        Debug.Log("Здоровье героя " + lives + "XP");
 
     }
 }

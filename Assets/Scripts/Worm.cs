@@ -15,7 +15,7 @@ public class Worm : Entyty
 
             Hero.Instance.GetDamage();
             lives--;
-            Debug.Log("Worm " + lives);
+            Debug.Log("У червя осталось " + lives + "XP");
 
         }
 

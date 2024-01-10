@@ -9,7 +9,7 @@ public class WalkingMonster : Entyty
 
     [SerializeField] private int lives = 3;
 
-    private float speed = 0.5f;
+    private float speed = 2f;
     private Vector3 direction;
     private SpriteRenderer sprite;
 
@@ -42,7 +42,7 @@ public class WalkingMonster : Entyty
         {
             Hero.Instance.GetDamage(); // Вызывает метод GetDamage у героя
             lives--;                    // Отнимает жизни у монстра
-            Debug.Log("Worm " + lives);  //Выводит сообщение в консоль
+            Debug.Log("У яблока осталоcь " + lives + "XP");  //Выводит сообщение в консоль
         }
 
         if(lives < 1)
