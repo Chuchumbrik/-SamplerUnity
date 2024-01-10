@@ -7,7 +7,16 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class WalkingMonster : Entyty
 {
 
-    [SerializeField] private int lives = 3;
+    //[SerializeField] private int lives = 7;
+    //[SerializeField] private int gamage = 2;
+    //[SerializeField] private new string name = "BOSS";
+
+    private WalkingMonster()
+    {
+        lives = 10;
+        damage = 10;
+        name = "BOSS";
+    }
 
     private float speed = 2f;
     private Vector3 direction;
@@ -40,9 +49,12 @@ public class WalkingMonster : Entyty
     {
         if (collision.gameObject == Hero.Instance.gameObject) // Если объект столкновения является героем
         {
-            Hero.Instance.GetDamage(); // Вызывает метод GetDamage у героя
-            lives--;                    // Отнимает жизни у монстра
-            Debug.Log("У яблока осталоcь " + lives + "XP");  //Выводит сообщение в консоль
+            Debug.Log(lives + " " + damage + " " + name);
+            Hero.Instance.GetDamage(damage);
+            GetDamage(Hero.Instance.damage);// Вызывает метод GetDamage у героя
+
+            //lives--;                      // Отнимает жизни у монстра
+            //Debug.Log("У яблока осталоcь " + lives + "XP");  //Выводит сообщение в консоль
         }
 
         if(lives < 1)

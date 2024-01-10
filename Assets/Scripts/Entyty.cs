@@ -5,19 +5,25 @@ using UnityEngine;
 public class Entyty : MonoBehaviour
 {
 
-    public virtual void GetDamage()
+    public int damage;
+    public new string name;
+    public int lives;
+
+
+    public virtual void GetDamage(int recivedDamage)
     {
 
-
+        lives -= recivedDamage;
+        Debug.Log("Здоровье " + name +" - "+ lives + " XP");
 
     }
 
-    public virtual void Die()
+    public void Die()
     {
 
         Destroy(this.gameObject);
     }
-
+     
 
 
 

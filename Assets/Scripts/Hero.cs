@@ -5,13 +5,22 @@ using UnityEngine;
 public class Hero : Entyty
 {
     [SerializeField] private float speed = 3f; // скорость движения
-    [SerializeField] private int lives = 5; // скорость движения
+    //[SerializeField] lives = 5; // скорость движения
     [SerializeField] private float jumpForce = 7f; // сила прыжка
     private bool isGrounded = false;
+    //[SerializeField] public static int gamage = 2;
+    //[SerializeField] private new string name = "Hero";
 
     private Rigidbody2D rb;
     private Animator anim;
     private SpriteRenderer sprite;
+
+    private Hero()
+    {
+        lives = 10;
+        damage = 2;
+        name = "Hero";
+    }
 
     private states state
     {
@@ -70,14 +79,14 @@ public class Hero : Entyty
         if (!isGrounded) state = states.jump;
     }
 
-    public override void GetDamage()
+    /*public override void GetDamage()
 
     {
 
         lives -= 1;
         Debug.Log("Здоровье героя " + lives + "XP");
 
-    }
+    }*/
 }
 
 public enum states
