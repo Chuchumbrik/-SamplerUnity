@@ -9,6 +9,7 @@ public class Entyty : MonoBehaviour
 
     public virtual void GetDamage()
     {
+        Debug.Log(name + " " +lives);
         lives--;
         if (lives < 1)
             Die();

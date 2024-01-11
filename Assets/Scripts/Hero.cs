@@ -30,10 +30,10 @@ public class Hero : Entyty
 
     private void Awake()
     {
+        Instance = this;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
-        Instance = this;
         isRecharged = true; // На начало игры перезаряжено
     }
 
@@ -47,7 +47,7 @@ public class Hero : Entyty
 
     private void Update()
     {
-        if (isGrounded) state = states.skin2_idle;
+        if (isGrounded && !isAttacking) state = states.skin2_idle;
 
         if (!isAttacking && Input.GetButton("Horizontal"))
             Run();
@@ -101,13 +101,13 @@ public class Hero : Entyty
 
     private IEnumerator AttackAnimation() //Подсчёт времени атаки
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         isAttacking = false;
     }
 
     private IEnumerator AttackCoolDown() //Подсчёт времени перезарядки
     {
-        yield return new WaitForSeconds(0.6f);  
+        yield return new WaitForSeconds(1.2f);
         isRecharged = true;
     }
 
@@ -130,7 +130,7 @@ public class Hero : Entyty
 
     private void OnAttack()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPos.position,attackRange, enemy);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPos.position, attackRange, enemy);
 
         for (int i = 0; i < colliders.Length; i++)
         {
