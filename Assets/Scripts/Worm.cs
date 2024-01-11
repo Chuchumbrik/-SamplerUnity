@@ -5,7 +5,10 @@ using UnityEngine;
 public class Worm : Entyty
 {
 
-    [SerializeField] private int lives = 3;
+    private void Start()
+    {
+        lives = 1;
+    }
 
 
     private void OnCollisionEnter2D(Collision2D collision)

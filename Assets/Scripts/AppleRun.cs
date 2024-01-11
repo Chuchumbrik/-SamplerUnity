@@ -7,8 +7,6 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class WalkingMonster : Entyty
 {
 
-    [SerializeField] private int lives = 3;
-
     private float speed = 2f;
     private Vector3 direction;
     private SpriteRenderer sprite;
@@ -20,6 +18,7 @@ public class WalkingMonster : Entyty
 
     private void Start() // Метод, который вызывается при запуске сцены
     {
+        lives = 1;
         direction = transform.right; // Присваивает переменной direction значение вектора, указывающего вправо относительно объекта
     }
     private void Move() // Метод, который отвечает за перемещение врага
