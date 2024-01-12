@@ -2,43 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hero : Entyty
+public class Hero : Entity
 {
     [SerializeField] private float speed = 3f; // скорость движения
-    //[SerializeField] lives = 5; // скорость движения
-    [SerializeField] private float jumpForce = 7f; // сила прыжка
+    [SerializeField] private int lives = 5; // Кол-во жизней
+    [SerializeField] private float jumpForce = 15f; // сила прыжка
     private bool isGrounded = false;
-    //[SerializeField] public static int gamage = 2;
-    //[SerializeField] private new string name = "Hero";
 
     private Rigidbody2D rb;
-    private Animator anim;
     private SpriteRenderer sprite;
+    private Animator anim;
 
-    private Hero()
+    public static Hero Instance { get; set; }
+
+    private States State
     {
-        lives = 10;
-        damage = 2;
-        name = "Hero";
-    }
-
-    private states state
-    {
-        get { return (states)anim.GetInteger("state"); }
-        set { anim.SetInteger("state", (int)value); }
-
+        get { return (States)anim.GetInteger("State"); }
+        set { anim.SetInteger("State", (int)value); }
     }
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
+        anim = GetComponent<Animator>();
         Instance = this;
     }
-
-
-    public static Hero Instance { get; set; }
 
     private void FixedUpdate()
     {
@@ -47,7 +36,7 @@ public class Hero : Entyty
 
     private void Update()
     {
-        if (isGrounded) state = states.idle;
+        if (isGrounded) State = States.idle;
 
         if (Input.GetButton("Horizontal"))
             Run();
@@ -57,7 +46,7 @@ public class Hero : Entyty
 
     private void Run()
     {
-        if (isGrounded) state = states.run;
+        if (isGrounded) State = States.run;
 
         Vector3 dir = transform.right * Input.GetAxis("Horizontal");
 
@@ -73,25 +62,23 @@ public class Hero : Entyty
 
     private void CheckGround()
     {
-        Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, 0.3f);
+        Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, 0.35f);
         isGrounded = collider.Length > 1;
 
-        if (!isGrounded) state = states.jump;
+        if (!isGrounded) State = States.jump;
     }
 
-    /*public override void GetDamage()
-
+    public override void GetDamage()
     {
-
         lives -= 1;
-        Debug.Log("Здоровье героя " + lives + "XP");
-
-    }*/
+        Debug.Log(lives);
+    }
 }
 
-public enum states
+public enum States
 {
     idle,
     run,
     jump
+
 }
