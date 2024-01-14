@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Tower : Entity
 {
-    private int lives = 5;
+    private void Start()
+    {
+        lives = 5;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
