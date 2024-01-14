@@ -107,6 +107,14 @@ public class Hero : Entity
         isRecharged = true;
     }
 
+    private IEnumerator EnemyOnAttack(Collider2D enemy)
+    {
+        SpriteRenderer enemyColor = enemy.GetComponentInChildren<SpriteRenderer>();
+        enemyColor.color = new Color(1f, 0.0859375f, 0.10546875f);
+        yield return new WaitForSeconds(0.2f);
+        enemyColor.color = new Color(1, 1, 1);
+    }
+
 
 
     private void OnAttack() 
@@ -116,6 +124,7 @@ public class Hero : Entity
         for (int i = 0; i < colliders.Length; i++) 
         {
             colliders[i].GetComponent<Entity>().GetDamage();
+            StartCoroutine(EnemyOnAttack(colliders[i]));
 
         }
 
