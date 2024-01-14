@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Hero : Entity
 {
     [SerializeField] private float speed = 3f; // скорость движения
-    //[SerializeField] private new int lives = 5; // Кол-во жизней
+    [SerializeField] private int health; // Кол-во жизней
     [SerializeField] private float jumpForce = 15f; // сила прыжка
     private bool isGrounded = false;
+
+    [SerializeField] private Image[] hearth;
+
+    [SerializeField] private Sprite aliveHeart;
+    [SerializeField] private Sprite deadHeart;
 
     public bool isAttacking = false;
     public bool isRecharged = true;
@@ -24,12 +30,6 @@ public class Hero : Entity
 
     public static Hero Instance { get; set; }
 
-     private void Start()
-    {
-        lives = 5;
-    }
-
-
     private States State
     {
         get { return (States)anim.GetInteger("State"); }
@@ -38,6 +38,8 @@ public class Hero : Entity
 
     private void Awake()
     {
+        lives = 5;
+        health = lives;
         Instance = this;
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponentInChildren<SpriteRenderer>();
@@ -60,6 +62,22 @@ public class Hero : Entity
             Jump();
         if (Input.GetButtonDown("Fire1"))
             Attack();
+        if (health > lives)
+            health = lives;
+
+        for (int i = 0; i < hearth.Length; i++) 
+        {
+            if (i < health)
+                hearth[i].sprite = aliveHeart;
+            else
+                hearth[i].sprite = deadHeart;
+
+
+           /* if (i < health)
+                hearth[i].enabled = true;
+            else
+                hearth[i].enabled = false;*/
+        }
     }
 
 
@@ -138,8 +156,14 @@ public class Hero : Entity
 
     public override void GetDamage()
     {
-        //lives -= 1;
+        lives -= 1;
         Debug.Log(lives);
+        if (health <= 1) 
+        {
+            Die();
+            foreach (var h in hearth)
+                h.sprite = deadHeart;
+        }
     }
 }
 

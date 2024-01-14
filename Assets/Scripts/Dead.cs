@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Dead : Entity
 {
-    private float speed = 0.5f;
+    //private float speed = 0.5f;
     private Vector3 direction;
     private SpriteRenderer sprite;
 
@@ -16,6 +16,7 @@ public class Dead : Entity
     private void Start() // Метод, который вызывается при запуске сцены
     {
         direction = transform.right; // Присваивает переменной direction значение вектора, указывающего вправо относительно объекта
+        lives = 5;
     }
 
     private void Move()
