@@ -119,6 +119,7 @@ public class Hero : Entyty
             state = states.skin2_attack;
             isAttacking = true;
             isRecharged = false;
+            int test = 20;
 
 
             StartCoroutine(AttackAnimation());
