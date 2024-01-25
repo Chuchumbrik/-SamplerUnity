@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      animation_death_00020_0: 1273158584858114743
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
