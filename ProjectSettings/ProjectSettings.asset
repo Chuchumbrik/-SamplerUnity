@@ -715,11 +715,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 5b85a2f2-1a2c-40b5-a634-650f8acacde9
+  cloudProjectId: 1583dc71-70ba-448b-8320-f1d9fcf2f18e
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: NewTestUnity
-  organizationId: mussha2013
+  projectName: Home_Project 2024-01-12_13-58-40
+  organizationId: zippo19977
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
